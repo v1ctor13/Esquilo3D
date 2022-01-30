@@ -7,7 +7,6 @@ void loop(GLFWwindow* janela){
 		desenhar();
 		glfwSwapBuffers(janela);
 		glfwPollEvents();
-
 	}while(!glfwWindowShouldClose(janela) && !glfwGetKey(janela, GLFW_KEY_ESCAPE));
 }
 
