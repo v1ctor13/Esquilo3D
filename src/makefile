@@ -4,19 +4,23 @@ DEPENDENCIES 			= -lglfw3 -lglew32 -lopengl32 -lgdi32 -lUser32 -lShell32 -lOpeng
 
 FLAGS 				= -D GLEW_STATIC
 
-ESQUILO_3D_BUILDER_DEPENDENCIES = $(OBJ)/Esquilo3D.o
+GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitivas.o $(OBJ)/vetores.o
 
 ROOT 	= ..
 HEADERS = headers
 BIN 	= ../bin
 OBJ 	= obj
-LIB	= lib
+LIB		= lib
 
 all:
 	gcc -c Esquilo3D.c -o $(OBJ)/Esquilo3D.o -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
 
-jogo: all
-	gcc $(ROOT)/jogo.c -o $(ROOT)/jogo.exe $(ESQUILO_3D_BUILDER_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
+obj: all
+	gcc -c primitivas.c -o $(OBJ)/primitivas.o -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
+	gcc -c vetores.c -o $(OBJ)/vetores.o -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
+
+jogo: obj
+	gcc $(ROOT)/jogo.c -o $(ROOT)/jogo.exe $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
 
 play:
 	cd $(ROOT) && jogo.exe 
