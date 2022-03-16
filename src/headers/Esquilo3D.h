@@ -17,12 +17,12 @@
 //----------------- PROTÓTIPOS ***********/
 
 /*@brief Inicializa a janela em contexto OpenGL recebendo a Altura e a Largura em pixels*/
-GLFWwindow* inicializarJanela(unsigned int largura, unsigned int altura);
+GLFWwindow* initializeWindow(unsigned int largura, unsigned int altura);
 
 void gpuInfo();
-void redimensiona(GLFWwindow* window);
-void desenhar();
-void desenharCubo(float s);
+void redimensionate(GLFWwindow* window);
+void draw();
+void drawCube(float s);
 void CheckGLError();
 
 #endif

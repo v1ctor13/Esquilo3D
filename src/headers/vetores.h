@@ -3,13 +3,13 @@
 
 #include "Esquilo3D.h"
 
-typedef struct vector3* vec3;
+typedef float* vetor3;
 
 //----------- PROTÓTIPOS
-vec3 newVector3(float x, float y, float z);
-float getVetor3_x(vec3 v);
-float getVetor3_y(vec3 v);
-float getVetor3_z(vec3 v);
-float* getCoord(vec3 v);
+vetor3 criarVetor3(float x, float y, float z);
+float getVetor3_x(float* v);
+float getVetor3_y(float* v);
+float getVetor3_z(float* v);
+float* getCoord(float* v);
 
 #endif

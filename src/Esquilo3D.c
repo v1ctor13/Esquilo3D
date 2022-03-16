@@ -1,6 +1,6 @@
 #include "Esquilo3D.h"
 
-GLFWwindow* inicializarJanela(unsigned int largura, unsigned int altura){
+GLFWwindow* initializeWindow(unsigned int largura, unsigned int altura){
     if(!glfwInit()){
         printf("[ERRO] não foi possível inicializar o GLFW.\n");
         exit(-1);
@@ -27,7 +27,7 @@ GLFWwindow* inicializarJanela(unsigned int largura, unsigned int altura){
     return janela;
 }
 
-void desenhar(){
+void draw(){
 	glLoadIdentity();
 	glPushMatrix();
 	
@@ -60,7 +60,7 @@ void CheckGLError(){
     }
 }
 
-void redimensiona(GLFWwindow* janela){
+void redimensionate(GLFWwindow* janela){
     unsigned int largura, altura;
 
     glfwGetFramebufferSize(janela, &largura, &altura);
