@@ -9,9 +9,9 @@ float* criarVetor3(float x, float y, float z){
     return &v[0];
 }
 
-float* getCoord(float* v){
-    return &v[0];
-}
+// float* getCoord(float* v){
+//     return &v[0];
+// }
 
 float getVetor3_x(float* v){
     return v[0];

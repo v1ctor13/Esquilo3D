@@ -1,6 +1,8 @@
 #include "Esquilo3D.h"
 
-GLFWwindow* initializeWindow(unsigned int largura, unsigned int altura){
+float angulo;
+
+GLFWwindow* iniciarJanela(unsigned int largura, unsigned int altura){
     if(!glfwInit()){
         printf("[ERRO] não foi possível inicializar o GLFW.\n");
         exit(-1);
@@ -27,23 +29,26 @@ GLFWwindow* initializeWindow(unsigned int largura, unsigned int altura){
     return janela;
 }
 
-void draw(){
+void desenhar(){
 	glLoadIdentity();
+
 	glPushMatrix();
-	
 	glTranslatef(15.0f, 0.0f, -50.0f);
-	glRotatef(30.0f, 10.0f, 25.0f, 0.0f);
-	glScalef(2.0f, 1.0f, 1.0f);
-	desenharCubo(10);
-
+	glRotatef(angulo, 10.0f, 25.0f, 0.0f);
+	glScalef(1.0f, 1.0f, 1.0f);
+	desenharEsfera(5.0f ,5.0f, 10.0f);
 	glPopMatrix();
-    glPushMatrix();
 
+    glPushMatrix();
 	glTranslatef(-15.0f, 0.0f, -50.0f);
-	glRotatef(50.0f, 46.0f, 15.0f, 0.0f);
+	glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
 	desenharCubo(10);
+
+    angulo += 0.01;
 }
+
+
 
 void gpuInfo(){
     printf("\n\n[*] Janela iniciada com sucesso.\n");
@@ -60,7 +65,7 @@ void CheckGLError(){
     }
 }
 
-void redimensionate(GLFWwindow* janela){
+void redimensionar(GLFWwindow* janela){
     unsigned int largura, altura;
 
     glfwGetFramebufferSize(janela, &largura, &altura);
