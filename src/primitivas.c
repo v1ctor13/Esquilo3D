@@ -68,10 +68,13 @@ void desenharEsfera(float raio, unsigned int nPilhas, unsigned int nSetores){
     glPointSize(5.0f);
     glBegin(GL_POINTS);
 
-	NODE_VET3* n = *pontos;
+	// ↓↓↓ TO-DO: encapsular
+	NODE_LISTA_VET3* n = *pontos;
 	while(n != NULL){
 		glVertex3fv(n->dado);
 		n = n->prox;
 	}
+	// ↑↑↑
+
     glEnd();
 }

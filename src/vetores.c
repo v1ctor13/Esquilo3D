@@ -39,7 +39,7 @@ int tamanhoListaVet3(LISTA_VET3 lista){
         return 0;
     }
     int c = 0;
-    NODE_VET3* node = *lista;
+    NODE_LISTA_VET3* node = *lista;
     while(node != NULL){
         c++;
         node = node->prox;
@@ -51,7 +51,7 @@ int inserirListaVet3(LISTA_VET3 lista, vet3 dado){
     if(lista == NULL){
         return 0;
     }
-    NODE_VET3* node = (NODE_VET3*)malloc(sizeof(NODE_VET3));
+    NODE_LISTA_VET3* node = (NODE_LISTA_VET3*)malloc(sizeof(NODE_LISTA_VET3));
     if(node == NULL){
         return -1;
     }
@@ -61,7 +61,7 @@ int inserirListaVet3(LISTA_VET3 lista, vet3 dado){
     if(*lista ==  NULL){
         *lista = node;
     }else{
-        NODE_VET3* aux = *lista;
+        NODE_LISTA_VET3* aux = *lista;
         while(aux->prox != NULL){
             aux = aux->prox;
         }

@@ -5,12 +5,12 @@
 
 typedef float* vet3;
 
-typedef struct NODE_VET3{
+typedef struct NODE_LISTA_VET3{
     vet3 dado;
-    struct NODE_VET3* prox;
-}NODE_VET3;
+    struct NODE_LISTA_VET3* prox;
+}NODE_LISTA_VET3;
 
-typedef struct NODE_VET3** LISTA_VET3;
+typedef struct NODE_LISTA_VET3** LISTA_VET3;
 
 //----------- PROTÓTIPOS
 vet3 criarVet3(float x, float y, float z);
@@ -25,9 +25,5 @@ int tamanhoListaVet3(LISTA_VET3 lista);
 int inserirListaVet3(LISTA_VET3 lista, vet3 dado);
 
 // LISTA_VETOR2 criarListaVetor2();
-
-// Cria uma lista de lista de vetores
-// LISTA_VETOR3 criarMatrizVetor3();
-
 
 #endif
