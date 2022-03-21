@@ -3,13 +3,31 @@
 
 #include "Esquilo3D.h"
 
-typedef float* vetor3;
+typedef float* vet3;
+
+typedef struct NODE_VET3{
+    vet3 dado;
+    struct NODE_VET3* prox;
+}NODE_VET3;
+
+typedef struct NODE_VET3** LISTA_VET3;
 
 //----------- PROTÓTIPOS
-vetor3 criarVetor3(float x, float y, float z);
-float getVetor3_x(float* v);
-float getVetor3_y(float* v);
-float getVetor3_z(float* v);
+vet3 criarVet3(float x, float y, float z);
+float getVet3_x(float* v);
+float getVet3_y(float* v);
+float getVet3_z(float* v);
 float* getCoord(float* v);
+
+LISTA_VET3 criarListaVetor3();
+void desalocarListaVet3(LISTA_VET3 lista);
+int tamanhoListaVet3(LISTA_VET3 lista);
+int inserirListaVet3(LISTA_VET3 lista, vet3 dado);
+
+// LISTA_VETOR2 criarListaVetor2();
+
+// Cria uma lista de lista de vetores
+// LISTA_VETOR3 criarMatrizVetor3();
+
 
 #endif

@@ -1,7 +1,7 @@
 #include "vetores.h"
 #include "primitivas.h"
 
-static void desenharFace(vetor3 v1, vetor3 v2, vetor3 v3, vetor3 v4, cor c){
+static void desenharFace(vet3 v1, vet3 v2, vet3 v3, vet3 v4, cor c){
 	glColor3fv(c);
 	glBegin(GL_QUADS);
 	glVertex3fv(v1);
@@ -14,15 +14,15 @@ static void desenharFace(vetor3 v1, vetor3 v2, vetor3 v3, vetor3 v4, cor c){
 void desenharCubo(float s){
 	float d = s / 2.0f;
 
-	vetor3 v1 = criarVetor3(-d, d, d);
-	vetor3 v2 = criarVetor3(-d,-d, d);
-	vetor3 v3 = criarVetor3( d,-d, d);
-	vetor3 v4 = criarVetor3( d, d, d);
+	vet3 v1 = criarVet3(-d, d, d);
+	vet3 v2 = criarVet3(-d,-d, d);
+	vet3 v3 = criarVet3( d,-d, d);
+	vet3 v4 = criarVet3( d, d, d);
 	
-	vetor3 v5 = criarVetor3( d, d,-d);
-	vetor3 v6 = criarVetor3( d,-d,-d);
-	vetor3 v7 = criarVetor3(-d,-d,-d);
-	vetor3 v8 = criarVetor3(-d, d,-d);
+	vet3 v5 = criarVet3( d, d,-d);
+	vet3 v6 = criarVet3( d,-d,-d);
+	vet3 v7 = criarVet3(-d,-d,-d);
+	vet3 v8 = criarVet3(-d, d,-d);
 
 	// frente
 	desenharFace(v1, v2, v3, v4, vermelho);
@@ -39,29 +39,26 @@ void desenharCubo(float s){
 }
 
 void desenharEsfera(float raio, unsigned int nPilhas, unsigned int nSetores){
-    vetor3 pontos[5000];
+	LISTA_VET3 pontos = criarListaVetor3();
 
     const float PI = 3.14159265359;
 
     float deltaPI = PI / nPilhas;
     float deltaTheta = 2 * PI / nSetores;
 
-    int contador = 0;
     for(int i = 0; i <= nPilhas; i++){
 
         float pi = -PI / 2.0 + i * deltaPI;
         float aux = raio * cos(pi);
         float y = raio * sin(pi);
 
-
         for(int j = 0; j < nSetores; j++){
             float theta = j * deltaTheta;
             float x = aux * sin(theta);
             float z = aux * cos(theta);
 
-            vetor3 v = criarVetor3(x, y, z);
-            pontos[contador] = v;
-            contador++;
+            vet3 v = criarVet3(x, y, z);
+			inserirListaVet3(pontos, v);
         }// próximo j
 
     }// próximo i
@@ -70,8 +67,11 @@ void desenharEsfera(float raio, unsigned int nPilhas, unsigned int nSetores){
     glColor3fv(vermelho);
     glPointSize(5.0f);
     glBegin(GL_POINTS);
-    for(int i = 0; i < contador; i++){
-        glVertex3fv(pontos[i]);
-    }
+
+	NODE_VET3* n = *pontos;
+	while(n != NULL){
+		glVertex3fv(n->dado);
+		n = n->prox;
+	}
     glEnd();
 }

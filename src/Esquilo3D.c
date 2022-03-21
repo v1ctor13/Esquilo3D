@@ -33,17 +33,17 @@ void desenhar(){
 	glLoadIdentity();
 
 	glPushMatrix();
-	glTranslatef(15.0f, 0.0f, -50.0f);
+	glTranslatef(0.0f, 0.0f, -30.0f);
 	glRotatef(angulo, 10.0f, 25.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
-	desenharEsfera(5.0f ,5.0f, 10.0f);
+	desenharEsfera(5.0f, 20.0f, 20.0f);
 	glPopMatrix();
 
-    glPushMatrix();
-	glTranslatef(-15.0f, 0.0f, -50.0f);
-	glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
-	glScalef(1.0f, 1.0f, 1.0f);
-	desenharCubo(10);
+    // glPushMatrix();
+	// glTranslatef(-15.0f, 0.0f, -50.0f);
+	// glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
+	// glScalef(1.0f, 1.0f, 1.0f);
+	// desenharCubo(10);
 
     angulo += 0.01;
 }
