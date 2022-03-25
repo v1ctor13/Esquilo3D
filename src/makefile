@@ -13,8 +13,17 @@ BIN 	= ../bin
 OBJ 	= obj
 LIB		= lib
 
+ifdef OS
+	ECHO = echo "estamos no windows!"
+else
+	ifeq($(shell uname), Linux)
+		ECHO = echo "estamos no linux!"
+	
+endif
+
 all:
 	gcc -c Esquilo3D.c -o $(OBJ)/Esquilo3D.o -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
+	$(ECHO)
 
 obj: all
 	gcc -c primitivas.c -o $(OBJ)/primitivas.o $(OBJ_DEPENDENCIES)
