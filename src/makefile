@@ -16,9 +16,9 @@ LIB		= lib
 ifdef OS
 	ECHO = echo "estamos no windows!"
 else
-	ifeq($(shell uname), Linux)
+	ifeq ($(shell uname), Linux)
 		ECHO = echo "estamos no linux!"
-	
+	endif
 endif
 
 all:
