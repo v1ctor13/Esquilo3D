@@ -1,11 +1,12 @@
-DEPENDENCIES_INCLUDE_FOLDER 	= ../dependencies/include
-DEPENDENCIES_LIB_FOLDER 	= ../dependencies/lib
-DEPENDENCIES 			= -lglfw3 -lglew32 -lopengl32 -lgdi32 -lUser32 -lShell32 -lOpengl32 -lkernel32 -lglu32
-
-FLAGS 				= -D GLEW_STATIC
-
-GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitivas.o $(OBJ)/vetores.o $(OBJ)/util.o
-OBJ_DEPENDENCIES = -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
+ifdef OS
+	DEPENDENCIES = -lglfw3 -lglew32 -lopengl32 -lgdi32 -lUser32 -lShell32 -lOpengl32 -lkernel32 -lglu32
+	PLAY = jogo.exe
+else
+	ifeq ($(shell uname), Linux)
+		DEPENDENCIES = -lglfw -lGL -lGLU -lm
+		PLAY = ./jogo.exe
+	endif
+endif
 
 ROOT 	= ..
 HEADERS = headers
@@ -13,17 +14,19 @@ BIN 	= ../bin
 OBJ 	= obj
 LIB		= lib
 
-ifdef OS
-	ECHO = echo "estamos no windows!"
-else
-	ifeq ($(shell uname), Linux)
-		ECHO = echo "estamos no linux!"
-	endif
-endif
+DEPENDENCIES_INCLUDE_FOLDER 	= ../dependencies/include/
+DEPENDENCIES_LIB_FOLDER 	= ../dependencies/lib/
+
+FLAGS 				= -D GLEW_STATIC
+
+GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitivas.o $(OBJ)/vetores.o $(OBJ)/util.o
+OBJ_DEPENDENCIES = -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
 
 all:
 	gcc -c Esquilo3D.c -o $(OBJ)/Esquilo3D.o -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
-	$(ECHO)
+
+linux-dependencies:
+	sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
 obj: all
 	gcc -c primitivas.c -o $(OBJ)/primitivas.o $(OBJ_DEPENDENCIES)
@@ -34,4 +37,4 @@ jogo: obj
 	gcc $(ROOT)/jogo.c -o $(ROOT)/jogo.exe $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
 
 play:
-	cd $(ROOT) && jogo.exe 
+	cd $(ROOT) && $(PLAY) 
