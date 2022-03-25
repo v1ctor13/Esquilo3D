@@ -13,17 +13,18 @@
 #include "vetores.h"
 #include "cores.h"
 #include "primitivas.h"
+#include "util.h"
 
 //----------------- TIPOS
 
 //----------------- PROTÓTIPOS ***********/
 
 /*@brief Inicializa a janela em contexto OpenGL recebendo a Altura e a Largura em pixels*/
-GLFWwindow* iniciarJanela(unsigned int largura, unsigned int altura);
+GLFWwindow* e3dIniciarJanela(unsigned int largura, unsigned int altura);
 
-void gpuInfo();
-void redimensionar(GLFWwindow* window);
-void desenhar();
-void CheckGLError();
+void e3dGpuInfo();
+void e3dRedimensionar(GLFWwindow* window);
+void e3dDesenhar();
+void e3dCheckGLError();
 
 #endif

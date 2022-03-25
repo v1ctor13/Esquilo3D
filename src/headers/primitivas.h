@@ -4,16 +4,14 @@
 #include "Esquilo3D.h"
 #include "cores.h"
 
-struct s_ponto3d {
+typedef struct E3D_PONTO_3D{
     float x;
     float y;
     float z;
-};
-
-typedef struct s_ponto3d ponto3d;
+}E3D_PONTO_3D;
 
 //--------------- PROTÓTIPOS ----------------
-void desenharCubo(float s);
-void desenharEsfera(float raio, unsigned int nPilhas, unsigned int nSetores);
+void e3dDesenharCubo(float s);
+void e3dDesenharEsfera(float raio, unsigned int nPilhas, unsigned int nSetores);
 
 #endif

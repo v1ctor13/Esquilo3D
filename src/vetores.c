@@ -1,7 +1,7 @@
 #include "vetores.h"
 
-vet3 criarVet3(float x, float y, float z){
-    vet3 v = (vet3)malloc(3 * sizeof(float));
+E3D_VET3 e3dCriarVet3(float x, float y, float z){
+    E3D_VET3 v = (E3D_VET3)malloc(3 * sizeof(float));
     v[0] = x;
     v[1] = y;
     v[2] = z;
@@ -12,20 +12,20 @@ vet3 criarVet3(float x, float y, float z){
 //     return &v[0];
 // }
 
-float getVet3_x(float* v){
+float e3dGetVet3_x(float* v){
     return v[0];
 }
 
-float getVet3_y(float* v){
+float e3dGetVet3_y(float* v){
     return v[1];
 }
 
-float getVet3_z(float* v){
+float e3dGetVet3_z(float* v){
     return v[2];
 }
 
-LISTA_VET3 criarListaVetor3(){
-    LISTA_VET3 lista = (LISTA_VET3)malloc(sizeof(LISTA_VET3));
+E3D_LISTA_VET3 e3dCriarListaVetor3(){
+    E3D_LISTA_VET3 lista = (E3D_LISTA_VET3)malloc(sizeof(E3D_LISTA_VET3));
     if(lista != NULL){
         *lista = NULL;
     }else{
@@ -34,12 +34,24 @@ LISTA_VET3 criarListaVetor3(){
     return lista;
 }
 
-int tamanhoListaVet3(LISTA_VET3 lista){
+void e3dDesalocarListaVet3(E3D_LISTA_VET3 lista){
+    if(lista != NULL){
+        E3D_NODE_LISTA_VET3* node;
+        while((*lista != NULL)){
+            node = *lista;
+            *lista = (*lista)->prox;
+            free(node);
+        }
+        free(lista);
+    }
+}
+
+int e3dTamanhoListaVet3(E3D_LISTA_VET3 lista){
     if(lista == NULL){
         return 0;
     }
     int c = 0;
-    NODE_LISTA_VET3* node = *lista;
+    E3D_NODE_LISTA_VET3* node = *lista;
     while(node != NULL){
         c++;
         node = node->prox;
@@ -47,11 +59,11 @@ int tamanhoListaVet3(LISTA_VET3 lista){
     return c;
 }
 
-int inserirListaVet3(LISTA_VET3 lista, vet3 dado){
+int e3dInserirListaVet3(E3D_LISTA_VET3 lista, E3D_VET3 dado){
     if(lista == NULL){
         return 0;
     }
-    NODE_LISTA_VET3* node = (NODE_LISTA_VET3*)malloc(sizeof(NODE_LISTA_VET3));
+    E3D_NODE_LISTA_VET3* node = (E3D_NODE_LISTA_VET3*)malloc(sizeof(E3D_NODE_LISTA_VET3));
     if(node == NULL){
         return -1;
     }
@@ -61,7 +73,7 @@ int inserirListaVet3(LISTA_VET3 lista, vet3 dado){
     if(*lista ==  NULL){
         *lista = node;
     }else{
-        NODE_LISTA_VET3* aux = *lista;
+        E3D_NODE_LISTA_VET3* aux = *lista;
         while(aux->prox != NULL){
             aux = aux->prox;
         }

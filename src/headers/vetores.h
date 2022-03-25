@@ -3,27 +3,27 @@
 
 #include "Esquilo3D.h"
 
-typedef float* vet3;
+typedef float* E3D_VET3;
 
-typedef struct NODE_LISTA_VET3{
-    vet3 dado;
-    struct NODE_LISTA_VET3* prox;
-}NODE_LISTA_VET3;
+typedef struct E3D_NODE_LISTA_VET3{
+    E3D_VET3 dado;
+    struct E3D_NODE_LISTA_VET3* prox;
+}E3D_NODE_LISTA_VET3;
 
-typedef struct NODE_LISTA_VET3** LISTA_VET3;
+typedef struct E3D_NODE_LISTA_VET3** E3D_LISTA_VET3;
 
-//----------- PROTÓTIPOS
-vet3 criarVet3(float x, float y, float z);
-float getVet3_x(float* v);
-float getVet3_y(float* v);
-float getVet3_z(float* v);
-float* getCoord(float* v);
+// ----------- PROTÓTIPOS
+E3D_VET3 e3dCriarVet3(float x, float y, float z);
+float e3dGetVet3_x(E3D_VET3 v);
+float e3dGetVet3_y(E3D_VET3 v);
+float e3dGetVet3_z(E3D_VET3 v);
+float* e3dGetCoord(E3D_VET3 v);
 
-LISTA_VET3 criarListaVetor3();
-void desalocarListaVet3(LISTA_VET3 lista);
-int tamanhoListaVet3(LISTA_VET3 lista);
-int inserirListaVet3(LISTA_VET3 lista, vet3 dado);
+E3D_LISTA_VET3 e3dCriarListaVetor3();
+void e3dDesalocarListaVet3(E3D_LISTA_VET3 lista);
+int e3dTamanhoListaVet3(E3D_LISTA_VET3 lista);
+int e3dInserirListaVet3(E3D_LISTA_VET3 lista, E3D_VET3 dado);
 
-// LISTA_VETOR2 criarListaVetor2();
+// LISTA_VET2 criarListaVetor2();
 
 #endif

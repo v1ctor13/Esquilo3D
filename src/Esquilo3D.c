@@ -2,7 +2,7 @@
 
 float angulo;
 
-GLFWwindow* iniciarJanela(unsigned int largura, unsigned int altura){
+GLFWwindow* e3dIniciarJanela(unsigned int largura, unsigned int altura){
     if(!glfwInit()){
         printf("[ERRO] não foi possível inicializar o GLFW.\n");
         exit(-1);
@@ -18,7 +18,7 @@ GLFWwindow* iniciarJanela(unsigned int largura, unsigned int altura){
     // ativa o contexto OpenGL
     glfwMakeContextCurrent(janela);
     // imprime informações sobre a GPU
-    gpuInfo();
+    e3dGpuInfo();
     // configura renderização de faces cheias
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	// ativa o teste de profundidade
@@ -29,14 +29,14 @@ GLFWwindow* iniciarJanela(unsigned int largura, unsigned int altura){
     return janela;
 }
 
-void desenhar(){
+void e3dDesenhar(){
 	glLoadIdentity();
 
 	glPushMatrix();
 	glTranslatef(0.0f, 0.0f, -30.0f);
 	glRotatef(angulo, 10.0f, 25.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
-	desenharEsfera(5.0f, 20.0f, 20.0f);
+	e3dDesenharEsfera(5.0f, 20.0f, 20.0f);
 	glPopMatrix();
 
     // glPushMatrix();
@@ -50,7 +50,7 @@ void desenhar(){
 
 
 
-void gpuInfo(){
+void e3dGpuInfo(){
     printf("\n\n[*] Janela iniciada com sucesso.\n");
     printf("> GPU Info: \n");
     printf("  > Fabricante - %s\n", glGetString(GL_VENDOR));
@@ -58,15 +58,15 @@ void gpuInfo(){
     printf("  > OpenGL - %s\n", glGetString(GL_VERSION));
 }
 
-void CheckGLError(){
+void e3dCheckGLError(){
     while (true){
         const GLenum err = glGetError();
         printf("Erro: %i\n", err);
     }
 }
 
-void redimensionar(GLFWwindow* janela){
-    unsigned int largura, altura;
+void e3dRedimensionar(GLFWwindow* janela){
+    int largura, altura;
 
     glfwGetFramebufferSize(janela, &largura, &altura);
 
