@@ -1,10 +1,10 @@
 ifdef OS
 	DEPENDENCIES = -lglfw3 -lglew32 -lopengl32 -lgdi32 -lUser32 -lShell32 -lOpengl32 -lkernel32 -lglu32
-	PLAY = jogo.exe
+	PLAY = game.exe
 else
 	ifeq ($(shell uname), Linux)
 		DEPENDENCIES = -lglfw -lGL -lGLU -lm
-		PLAY = ./jogo.exe
+		PLAY = ./game.exe
 	endif
 endif
 
@@ -14,12 +14,12 @@ BIN 	= ../bin
 OBJ 	= obj
 LIB		= lib
 
-DEPENDENCIES_INCLUDE_FOLDER 	= ../dependencies/include/
-DEPENDENCIES_LIB_FOLDER 	= ../dependencies/lib/
+DEPENDENCIES_INCLUDE_FOLDER = ../dependencies/include/
+DEPENDENCIES_LIB_FOLDER = ../dependencies/lib/
 
-FLAGS 				= -D GLEW_STATIC
+FLAGS = -D GLEW_STATIC
 
-GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitivas.o $(OBJ)/vetores.o $(OBJ)/util.o
+GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitives.o $(OBJ)/vectors.o $(OBJ)/util.o
 OBJ_DEPENDENCIES = -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
 
 all:
@@ -29,12 +29,12 @@ linux-dependencies:
 	sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
 obj: all
-	gcc -c primitivas.c -o $(OBJ)/primitivas.o $(OBJ_DEPENDENCIES)
-	gcc -c vetores.c -o $(OBJ)/vetores.o $(OBJ_DEPENDENCIES)
+	gcc -c primitives.c -o $(OBJ)/primitives.o $(OBJ_DEPENDENCIES)
+	gcc -c vectors.c -o $(OBJ)/vectors.o $(OBJ_DEPENDENCIES)
 	gcc -c util.c -o $(OBJ)/util.o $(OBJ_DEPENDENCIES)
 
-jogo: obj
-	gcc $(ROOT)/jogo.c -o $(ROOT)/jogo.exe $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
+game: obj
+	gcc $(ROOT)/game.c -o $(ROOT)/game.exe $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
 
 play:
 	cd $(ROOT) && $(PLAY) 

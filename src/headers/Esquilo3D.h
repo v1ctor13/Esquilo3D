@@ -10,9 +10,9 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "math.h"
-#include "vetores.h"
-#include "cores.h"
-#include "primitivas.h"
+#include "vectors.h"
+#include "colors.h"
+#include "primitives.h"
 #include "util.h"
 
 //----------------- TIPOS
@@ -20,11 +20,11 @@
 //----------------- PROTÓTIPOS ***********/
 
 /*@brief Inicializa a janela em contexto OpenGL recebendo a Altura e a Largura em pixels*/
-GLFWwindow* e3dIniciarJanela(unsigned int largura, unsigned int altura);
+GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height);
 
 void e3dGpuInfo();
-void e3dRedimensionar(GLFWwindow* window);
-void e3dDesenhar();
+void e3dRedimensionate(GLFWwindow* window);
+void e3dDraw();
 void e3dCheckGLError();
 
 #endif

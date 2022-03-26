@@ -2,21 +2,21 @@
 
 float angulo;
 
-GLFWwindow* e3dIniciarJanela(unsigned int largura, unsigned int altura){
+GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height){
     if(!glfwInit()){
-        printf("[ERRO] não foi possível inicializar o GLFW.\n");
+        printf("[ERROR] couldn't initialize GLFW.\n");
         exit(-1);
     }
 
-    GLFWwindow* janela = glfwCreateWindow(largura, altura, "Janela GLFW em contexto OpenGL", NULL, NULL);
-    if(!janela){
+    GLFWwindow* window = glfwCreateWindow(width, height, "Janela GLFW em contexto OpenGL", NULL, NULL);
+    if(!window){
         glfwTerminate();
-        printf("[ERRO] não foi possível inicializar uma janela GLFWwindow.\n");
+        printf("[ERROR] couldn't initialize a GLFWwindow window.\n");
         exit(-1);
     }
 
     // ativa o contexto OpenGL
-    glfwMakeContextCurrent(janela);
+    glfwMakeContextCurrent(window);
     // imprime informações sobre a GPU
     e3dGpuInfo();
     // configura renderização de faces cheias
@@ -24,59 +24,59 @@ GLFWwindow* e3dIniciarJanela(unsigned int largura, unsigned int altura){
 	// ativa o teste de profundidade
 	glEnable(GL_DEPTH_TEST);
     // ativa reconhecimento de teclado
-    glfwSetInputMode(janela, GLFW_STICKY_KEYS, true);
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, true);
     // retorna a janela criada
-    return janela;
+    return window;
 }
 
-void e3dDesenhar(){
+void e3dDraw(){
 	glLoadIdentity();
 
 	glPushMatrix();
 	glTranslatef(0.0f, 0.0f, -30.0f);
 	glRotatef(angulo, 10.0f, 25.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
-	e3dDesenharEsfera(5.0f, 20.0f, 20.0f);
+	e3dDrawSphere(5.0f, 20.0f, 20.0f);
 	glPopMatrix();
 
     glPushMatrix();
 	glTranslatef(-15.0f, 0.0f, -50.0f);
 	glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
-	e3dDesenharCubo(10);
+	e3dDrawCube(10);
 
-    angulo += 0.01;
+    angulo += 0.1;
 }
 
 
 
 void e3dGpuInfo(){
-    printf("\n\n[*] Janela iniciada com sucesso.\n");
+    printf("\n\n[*] Window initialized.\n");
     printf("> GPU Info: \n");
-    printf("  > Fabricante - %s\n", glGetString(GL_VENDOR));
-    printf("  > Modelo - %s\n", glGetString(GL_RENDERER));
-    printf("  > OpenGL - %s\n", glGetString(GL_VERSION));
+    printf("  > Manufactor  - %s\n", glGetString(GL_VENDOR));
+    printf("  > Model       - %s\n", glGetString(GL_RENDERER));
+    printf("  > OpenGL      - %s\n", glGetString(GL_VERSION));
 }
 
 void e3dCheckGLError(){
     while (true){
         const GLenum err = glGetError();
-        printf("Erro: %i\n", err);
+        printf("Error: %i\n", err);
     }
 }
 
-void e3dRedimensionar(GLFWwindow* janela){
-    int largura, altura;
+void e3dRedimensionate(GLFWwindow* window){
+    int width, height;
 
-    glfwGetFramebufferSize(janela, &largura, &altura);
+    glfwGetFramebufferSize(window, &width, &height);
 
-    glViewport(0, 0, largura, altura);
+    glViewport(0, 0, width, height);
 
-    float aspecto = (float)largura / (float)altura;
+    float aspect = (float)width / (float)height;
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, aspecto, 0.1f, 500.0f);
+    gluPerspective(45.0f, aspect, 0.1f, 500.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 }

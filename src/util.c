@@ -1,59 +1,100 @@
 #include "util.h"
 
-E3D_LISTA_INT e3dCriarListaInt(){
-    E3D_LISTA_INT lista = (E3D_LISTA_INT)malloc(sizeof(E3D_LISTA_INT));
-    if(lista != NULL){
-        *lista = NULL;
+// ---- E3D_INT_LIST 
+
+E3D_INT_LIST e3dCreateIntList(){
+    E3D_INT_LIST list = (E3D_INT_LIST)malloc(sizeof(E3D_INT_LIST));
+    if(list != NULL){
+        *list = NULL;
     }else{
-        return lista;
+        return list;
     }
-    return lista;
+    return list;
 }
 
-void e3dDesalocarListaInt(E3D_LISTA_INT lista){
-    if(lista != NULL){
-        E3D_NODE_LISTA_INT* node;
-        while((*lista != NULL)){
-            node = *lista;
-            *lista = (*lista)->prox;
+void e3dDestroyIntList(E3D_INT_LIST list){
+    if(list != NULL){
+        E3D_NODE_INT_LIST* node;
+        while((*list != NULL)){
+            node = *list;
+            *list = (*list)->next;
             free(node);
         }
-        free(lista);
+        free(list);
     }
 }
 
-int e3dTamanhoListaInt(E3D_LISTA_INT lista){
-    if(lista == NULL){
-        return 0;
-    }
+int e3dSizeofIntList(E3D_INT_LIST list){
+    if(list == NULL) return 0;
+
     int c = 0;
-    E3D_NODE_LISTA_INT* node = *lista;
+    E3D_NODE_INT_LIST* node = *list;
     while(node != NULL){
         c++;
-        node = node->prox;
+        node = node->next;
     }
     return c;
 }
 
-int e3dInserirListaInt(E3D_LISTA_INT lista, int dado){
-    if(lista == NULL){
-        return 0;
-    }
-    E3D_NODE_LISTA_INT* node = (E3D_NODE_LISTA_INT*)malloc(sizeof(E3D_NODE_LISTA_INT));
-    if(node == NULL){
-        return -1;
-    }
-    node->dado = dado;
-    node->prox = NULL;
+int e3dInsertIntoIntList(E3D_INT_LIST list, int data){
+    if(list == NULL) return 0;
 
-    if(*lista ==  NULL){
-        *lista = node;
+    E3D_NODE_INT_LIST* node = (E3D_NODE_INT_LIST*)malloc(sizeof(E3D_NODE_INT_LIST));
+    if(node == NULL) return -1;
+    
+    node->data = data;
+    node->next = NULL;
+
+    if(*list ==  NULL){
+        *list = node;
     }else{
-        E3D_NODE_LISTA_INT* aux = *lista;
-        while(aux->prox != NULL){
-            aux = aux->prox;
+        E3D_NODE_INT_LIST* aux = *list;
+        while(aux->next != NULL){
+            aux = aux->next;
         }
-        aux->prox = node;
+        aux->next = node;
     }
     return 1;
+}
+
+E3D_NODE_INT_LIST* e3dIntListIndexSearch(E3D_INT_LIST list, int index){
+    if(list == NULL) return NULL;
+
+    E3D_NODE_INT_LIST* node = *list;
+    if(node == NULL) return NULL;
+
+    int contador = 0;
+
+    while(contador < index){
+        node = node->next;
+        if(node == NULL) return NULL;
+
+        contador++;
+    }
+
+    return node;
+}
+
+// ---- E3D_LIST_OF_INT_LISTS
+
+E3D_LIST_OF_INT_LISTS e3dCreateListOfIntLists(){
+    E3D_LIST_OF_INT_LISTS list = (E3D_LIST_OF_INT_LISTS)malloc(sizeof(E3D_LIST_OF_INT_LISTS));
+    if(list != NULL){
+        *list = NULL;
+    }else{
+        return list;
+    }
+    return list;
+}
+
+void e3dDestroyListOfIntLists(E3D_LIST_OF_INT_LISTS list){
+
+}
+
+int e3dSizeofListOfIntLists(E3D_LIST_OF_INT_LISTS list){
+
+}
+
+int e3dInsertIntoListOfIntLists(E3D_LIST_OF_INT_LISTS list, int data){
+
 }
