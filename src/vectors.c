@@ -78,3 +78,21 @@ int e3dInsertIntoVec3List(E3D_VEC3_LIST list, E3D_VEC3 data){
     return 1;
 }
 
+E3D_VEC3 e3dVec3ListIndexSearch(E3D_VEC3_LIST list, int index){
+    if(list == NULL) return NULL;
+
+    E3D_NODE_VEC3_LIST* node = *list;
+    if(node == NULL) return NULL;
+
+    int contador = 0;
+
+    while(contador < index){
+        node = node->next;
+        if(node == NULL) return NULL;
+
+        contador++;
+    }
+
+    return node->data;
+}
+

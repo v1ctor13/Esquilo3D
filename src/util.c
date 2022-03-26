@@ -95,6 +95,42 @@ int e3dSizeofListOfIntLists(E3D_LIST_OF_INT_LISTS list){
 
 }
 
-int e3dInsertIntoListOfIntLists(E3D_LIST_OF_INT_LISTS list, int data){
+int e3dInsertIntoListOfIntLists(E3D_LIST_OF_INT_LISTS list, E3D_INT_LIST data){
+    if(list == NULL) return 0;
+
+    E3D_NODE_LIST_OF_INT_LISTS* node = (E3D_NODE_LIST_OF_INT_LISTS*)malloc(sizeof(E3D_NODE_LIST_OF_INT_LISTS));
+    if(node == NULL) return -1;
+    
+    node->data = data;
+    node->next = NULL;
+
+    if(*list ==  NULL){
+        *list = node;
+    }else{
+        E3D_NODE_LIST_OF_INT_LISTS* aux = *list;
+        while(aux->next != NULL){
+            aux = aux->next;
+        }
+        aux->next = node;
+    }
+    return 1;
+}
+
+E3D_INT_LIST e3dIntListOfListsIndexSearch(E3D_LIST_OF_INT_LISTS list, int index){
+    if(list == NULL) return NULL;
+
+    E3D_NODE_LIST_OF_INT_LISTS* node = *list;
+    if(node == NULL) return NULL;
+
+    int contador = 0;
+
+    while(contador < index){
+        node = node->next;
+        if(node == NULL) return NULL;
+
+        contador++;
+    }
+
+    return node->data;
 
 }

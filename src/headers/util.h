@@ -29,7 +29,7 @@ int e3dIntListIndexInsert(E3D_INT_LIST list, int index);
 E3D_LIST_OF_INT_LISTS e3dCreateListOfIntLists();
 void e3dDestroyListOfIntLists(E3D_LIST_OF_INT_LISTS list);
 int e3dSizeofListOfIntLists(E3D_LIST_OF_INT_LISTS list);
-int e3dInsertIntoListOfIntLists(E3D_LIST_OF_INT_LISTS list, int data);
+int e3dInsertIntoListOfIntLists(E3D_LIST_OF_INT_LISTS list, E3D_INT_LIST data);
 E3D_INT_LIST e3dIntListOfListsIndexSearch(E3D_LIST_OF_INT_LISTS list, int index);
 int e3dIntListOfListsIndexInsert(E3D_LIST_OF_INT_LISTS list, int index);
 

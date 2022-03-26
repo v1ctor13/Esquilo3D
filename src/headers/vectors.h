@@ -22,6 +22,7 @@ E3D_VEC3_LIST e3dCreateVec3List();
 void e3dDestroyVec3List(E3D_VEC3_LIST list);
 int e3dSizeofVec3List(E3D_VEC3_LIST list);
 int e3dInsertIntoVec3List(E3D_VEC3_LIST list, E3D_VEC3 data);
+E3D_VEC3 e3dVec3ListIndexSearch(E3D_VEC3_LIST list, int index);
 
 // LISTA_VET2 criarListaVetor2();
 

@@ -64,27 +64,47 @@ void e3dDrawSphere(float radius, unsigned int nStacks, unsigned int nSectors){
 
             E3D_VEC3 v = e3dCreateVec3(x, y, z);
 			e3dInsertIntoVec3List(points, v);
-			e3dInsertIntoIntList(pt, e3dSizeofVec3List(points));
-        }// próximo j
-		// indices[i] = pt;
-    }// próximo i
+			int index = e3dSizeofVec3List(points) - 1;
+			e3dInsertIntoIntList(pt, index);
 
-	// printf("PONTOS: %d\n", tamanhoListaVet3(pontos));
-    //--plota pontos
-    // glColor3fv(vermelho);
-    // glPointSize(5.0f);
-    // glBegin(GL_POINTS);
+        }
+		e3dInsertIntoListOfIntLists(indices, pt);
+    }
 
-	
+    glColor3fv(E3D_ORANGE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	
+	E3D_INT_LIST nodeListOfIntLists;
+	E3D_NODE_INT_LIST* nodeIntList;
+	for(int i = 0; i < nStacks; i++){
 
-	// ↓↓↓ TO-DO: encapsular
-	// NODE_LISTA_VET3* n = *pontos;
-	// while(n != NULL){
-	// 	glVertex3fv(n->dado);
-	// 	n = n->prox;
-	// }
-	// ↑↑↑
+		glBegin(GL_TRIANGLE_STRIP);
 
+		for(int j = 0; j < nSectors; j++){
+
+			nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i);
+			nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
+			int index = nodeIntList->data;
+			glVertex3fv(e3dVec3ListIndexSearch(points, index));
+
+			nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i + 1);
+			nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
+			index = nodeIntList->data;
+			glVertex3fv(e3dVec3ListIndexSearch(points, index));
+
+			if(j == (nSectors - 1) ){
+				nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i);
+				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+				int index = nodeIntList->data;
+				glVertex3fv(e3dVec3ListIndexSearch(points, index));
+
+				nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i + 1);
+				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+				index = nodeIntList->data;
+				glVertex3fv(e3dVec3ListIndexSearch(points, index));
+			}
+
+		}
+		glEnd();
+	}
 }

@@ -20,7 +20,7 @@ GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height){
     // imprime informações sobre a GPU
     e3dGpuInfo();
     // configura renderização de faces cheias
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// ativa o teste de profundidade
 	glEnable(GL_DEPTH_TEST);
     // ativa reconhecimento de teclado
@@ -37,13 +37,13 @@ void e3dDraw(){
 	glRotatef(angulo, 10.0f, 25.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 1.0f);
 	e3dDrawSphere(5.0f, 20.0f, 20.0f);
-	glPopMatrix();
+	// glPopMatrix();
 
-    glPushMatrix();
-	glTranslatef(-15.0f, 0.0f, -50.0f);
-	glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
-	glScalef(1.0f, 1.0f, 1.0f);
-	e3dDrawCube(10);
+    // glPushMatrix();
+	// glTranslatef(-15.0f, 0.0f, -50.0f);
+	// glRotatef(-angulo, 46.0f, 15.0f, 0.0f);
+	// glScalef(1.0f, 1.0f, 1.0f);
+	// e3dDrawCube(10);
 
     angulo += 0.1;
 }
