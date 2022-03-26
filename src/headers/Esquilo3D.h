@@ -15,9 +15,9 @@
 #include "primitives.h"
 #include "util.h"
 
-//----------------- TIPOS
+//-----------------   TIPOS    -----------------/
 
-//----------------- PROTÓTIPOS ***********/
+//----------------- PROTÓTIPOS -----------------/
 
 /*@brief Inicializa a janela em contexto OpenGL recebendo a Altura e a Largura em pixels*/
 GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height);

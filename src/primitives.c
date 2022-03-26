@@ -71,12 +71,15 @@ void e3dDrawSphere(float radius, unsigned int nStacks, unsigned int nSectors){
 		e3dInsertIntoListOfIntLists(indices, pt);
     }
 
-    glColor3fv(E3D_ORANGE);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // glColor3fv(E3D_ORANGE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	E3D_INT_LIST nodeListOfIntLists;
 	E3D_NODE_INT_LIST* nodeIntList;
 	for(int i = 0; i < nStacks; i++){
+
+		if(i % 2 == 0) glColor3fv(E3D_RED);
+		else glColor3fv(E3D_ORANGE);
 
 		glBegin(GL_TRIANGLE_STRIP);
 

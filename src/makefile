@@ -1,10 +1,12 @@
 ifdef OS
 	DEPENDENCIES = -lglfw3 -lglew32 -lopengl32 -lgdi32 -lUser32 -lShell32 -lOpengl32 -lkernel32 -lglu32
 	PLAY = game.exe
+	GAME_BUILD = game.exe
 else
 	ifeq ($(shell uname), Linux)
 		DEPENDENCIES = -lglfw -lGL -lGLU -lm
-		PLAY = ./game.exe
+		PLAY = ./game
+		GAME_BUILD = game
 	endif
 endif
 
@@ -34,7 +36,7 @@ obj: all
 	gcc -c util.c -o $(OBJ)/util.o $(OBJ_DEPENDENCIES)
 
 game: obj
-	gcc $(ROOT)/game.c -o $(ROOT)/game.exe $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
+	gcc $(ROOT)/game.c -o $(ROOT)/$(GAME_BUILD) $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)
 
 play:
 	cd $(ROOT) && $(PLAY) 

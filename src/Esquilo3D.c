@@ -4,7 +4,7 @@ float angulo;
 
 GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height){
     if(!glfwInit()){
-        printf("[ERROR] couldn't initialize GLFW.\n");
+        printf("[ERROR] couldn't initialize GLFW. Error code: %d\n", glfwGetError(NULL));
         exit(-1);
     }
 
