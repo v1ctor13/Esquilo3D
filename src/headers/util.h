@@ -3,18 +3,14 @@
 
 #include "Esquilo3D.h"
 
-// ---- STRUCTS ----
-typedef struct E3D_NODE_INT_LIST{
+typedef struct E3D_NODE_INT_LIST_STRUCT{
     int data;
-    struct E3D_NODE_INT_LIST* next;
+    struct E3D_NODE_INT_LIST_STRUCT* next;
 }E3D_NODE_INT_LIST;
 
-typedef struct E3D_NODE_INT_LIST** E3D_INT_LIST;
+typedef E3D_NODE_INT_LIST** E3D_INT_LIST;
 
-typedef struct E3D_NODE_LIST_OF_INT_LISTS{
-    E3D_INT_LIST data;
-    struct E3D_NODE_LIST_OF_INT_LISTS* next;
-}E3D_NODE_LIST_OF_INT_LISTS;
+typedef struct E3D_NODE_LIST_OF_INT_LISTS_STRUCT E3D_NODE_LIST_OF_INT_LISTS;
 
 typedef E3D_NODE_LIST_OF_INT_LISTS** E3D_LIST_OF_INT_LISTS;
 

@@ -4,8 +4,17 @@
 static unsigned int sphereId;
 static unsigned int gridTerrainId;
 
+struct E3D_3D_OBJECT_STRUCT{
+    unsigned int id;
+    E3D_VEC3 pos;
+};
+
+struct E3D_NODE_3D_OBJECT_LIST{
+    E3D_3D_OBJECT obj;
+    struct E3D_NODE_3D_OBJECT_LIST* next;
+};
+
 // FPS
-static float fps = 0.0f;
 float dt = 0.0f;
 float lastTime = 0.0f;
 
@@ -36,7 +45,6 @@ GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height){
     // retorna a janela criada
     return window;
 }
-
 void e3dGameLoop(GLFWwindow* window){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     e3dRedimensionate(window);
@@ -53,10 +61,6 @@ static void e3dLoopTimer(){
     currentTime = (float)glfwGetTime();
     dt = currentTime - lastTime;
     lastTime = currentTime;
-}
-
-void e3dSetFps(int newFps){
-    fps = (float)newFps;
 }
 
 static void e3dDrawGridTerrain(unsigned int id){

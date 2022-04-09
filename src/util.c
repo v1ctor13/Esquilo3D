@@ -1,5 +1,10 @@
 #include "util.h"
 
+struct E3D_NODE_LIST_OF_INT_LISTS_STRUCT{
+    E3D_INT_LIST data;
+    struct E3D_NODE_LIST_OF_INT_LISTS_STRUCT* next;
+};
+
 // ---- E3D_INT_LIST
 
 E3D_INT_LIST e3dCreateIntList(){

@@ -12,10 +12,13 @@
 #include "math.h"
 #include "vectors.h"
 #include "colors.h"
-#include "primitives.h"
 #include "util.h"
+#include "primitives.h"
 
 //-----------------   TIPOS    -----------------/
+
+typedef struct E3D_3D_OBJECT_STRUCT E3D_3D_OBJECT;
+typedef struct E3D_NODE_3D_OBJECT_LIST** E3D_3D_OBJECT_LIST;
 
 //----------------- PROTÓTIPOS -----------------/
 
@@ -23,11 +26,17 @@
 GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height);
 void e3dGameLoop(GLFWwindow* window);
 static void e3dLoopTimer();
-void e3dSetFps(int value);
 void e3dGpuInfo();
 void e3dRedimensionate(GLFWwindow* window);
 void e3dDrawInit();
 void e3dDraw(float delta);
 void e3dCheckGLError();
+
+E3D_3D_OBJECT_LIST e3dCreate3dObjectList();
+void e3dDestroy3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList);
+int e3dSizeof3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList);
+int e3dInsertInto3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList, E3D_3D_OBJECT obj);
+E3D_3D_OBJECT* e3d3dObjectListIndexSearch(E3D_3D_OBJECT_LIST e3dObjectList, int index);
+int e3d3dObjectIndexInsert(E3D_3D_OBJECT_LIST e3dObjectList, E3D_3D_OBJECT obj);
 
 #endif

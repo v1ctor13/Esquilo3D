@@ -1,5 +1,10 @@
 #include "vectors.h"
 
+struct E3D_NODE_VEC3_LIST_STRUCT{
+    E3D_VEC3 data;
+    struct E3D_NODE_VEC3_LIST_STRUCT* next;
+};
+
 E3D_VEC3 e3dCreateVec3(float x, float y, float z){
     E3D_VEC3 v = (E3D_VEC3)malloc(3 * sizeof(float));
     v[0] = x;

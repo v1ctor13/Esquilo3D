@@ -5,14 +5,10 @@
 
 typedef float* E3D_VEC3;
 
-typedef struct E3D_NODE_VEC3_LIST{
-    E3D_VEC3 data;
-    struct E3D_NODE_VEC3_LIST* next;
-}E3D_NODE_VEC3_LIST;
+typedef struct E3D_NODE_VEC3_LIST_STRUCT E3D_NODE_VEC3_LIST;
+typedef E3D_NODE_VEC3_LIST** E3D_VEC3_LIST;
 
-typedef struct E3D_NODE_VEC3_LIST** E3D_VEC3_LIST;
-
-// ----------- PROTÓTIPOS
+// ---- PROTÓTIPOS DE FUNÇÕES ----
 E3D_VEC3 e3dCreateVec3(float x, float y, float z);
 float e3dGetVec3_x(E3D_VEC3 v);
 float e3dGetVec3_y(E3D_VEC3 v);

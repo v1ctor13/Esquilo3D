@@ -21,7 +21,7 @@ DEPENDENCIES_LIB_FOLDER = ../dependencies/lib/
 
 FLAGS = -D GLEW_STATIC
 
-GAME_DEPENDENCIES = $(OBJ)/Esquilo3D.o $(OBJ)/primitives.o $(OBJ)/vectors.o $(OBJ)/util.o
+GAME_DEPENDENCIES = $(OBJ)/util.o $(OBJ)/Esquilo3D.o $(OBJ)/primitives.o $(OBJ)/vectors.o 
 OBJ_DEPENDENCIES = -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FODLER) $(DEPENDENCIES)
 
 all:
@@ -31,9 +31,9 @@ linux-dependencies:
 	sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
 obj: all
+	gcc -c util.c -o $(OBJ)/util.o $(OBJ_DEPENDENCIES)
 	gcc -c primitives.c -o $(OBJ)/primitives.o $(OBJ_DEPENDENCIES)
 	gcc -c vectors.c -o $(OBJ)/vectors.o $(OBJ_DEPENDENCIES)
-	gcc -c util.c -o $(OBJ)/util.o $(OBJ_DEPENDENCIES)
 
 game: obj
 	gcc $(ROOT)/game.c -o $(ROOT)/$(GAME_BUILD) $(GAME_DEPENDENCIES) -I $(HEADERS) -I $(DEPENDENCIES_INCLUDE_FOLDER) -L $(DEPENDENCIES_LIB_FOLDER) $(DEPENDENCIES)

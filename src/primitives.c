@@ -1,6 +1,6 @@
+#include "util.h"
 #include "vectors.h"
 #include "primitives.h"
-#include "util.h"
 
 static void e3dDrawFace(E3D_VEC3 v1, E3D_VEC3 v2, E3D_VEC3 v3, E3D_VEC3 v4, E3D_COLOR c){
 	glColor3fv(c);
