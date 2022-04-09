@@ -39,7 +39,7 @@ void e3dDrawCube(float s){
 	e3dDrawFace(v2, v7, v6, v3, E3D_YELLOW);
 }
 
-void e3dDrawSphere(float radius, unsigned int nStacks, unsigned int nSectors){
+void e3dDrawSphere(unsigned int id, float radius, E3D_COLOR color, unsigned int nStacks, unsigned int nSectors){
 	E3D_LIST_OF_INT_LISTS indices = e3dCreateListOfIntLists();
 
 	E3D_VEC3_LIST points = e3dCreateVec3List();
@@ -71,43 +71,46 @@ void e3dDrawSphere(float radius, unsigned int nStacks, unsigned int nSectors){
 		e3dInsertIntoListOfIntLists(indices, pt);
     }
 
-    // glColor3fv(E3D_ORANGE);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glNewList(id, GL_COMPILE);
+		glColor3fv(color);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glEnable(GL_CULL_FACE);
+		glFrontFace(GL_CCW);
+		glCullFace(GL_BACK);
 
-	E3D_INT_LIST nodeListOfIntLists;
-	E3D_NODE_INT_LIST* nodeIntList;
-	for(int i = 0; i < nStacks; i++){
+		E3D_INT_LIST nodeListOfIntLists;
+		E3D_NODE_INT_LIST* nodeIntList;
+		for(int i = 0; i < nStacks; i++){
 
-		if(i % 2 == 0) glColor3fv(E3D_RED);
-		else glColor3fv(E3D_ORANGE);
+			glBegin(GL_TRIANGLE_STRIP);
 
-		glBegin(GL_TRIANGLE_STRIP);
+			for(int j = 0; j < nSectors; j++){
 
-		for(int j = 0; j < nSectors; j++){
-
-			nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i);
-			nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
-			int index = nodeIntList->data;
-			glVertex3fv(e3dVec3ListIndexSearch(points, index));
-
-			nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i + 1);
-			nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
-			index = nodeIntList->data;
-			glVertex3fv(e3dVec3ListIndexSearch(points, index));
-
-			if(j == (nSectors - 1) ){
 				nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i);
-				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
 				int index = nodeIntList->data;
 				glVertex3fv(e3dVec3ListIndexSearch(points, index));
 
 				nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i + 1);
-				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+				nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, j);
 				index = nodeIntList->data;
 				glVertex3fv(e3dVec3ListIndexSearch(points, index));
-			}
 
+				if(j == (nSectors - 1) ){
+					nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i);
+					nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+					int index = nodeIntList->data;
+					glVertex3fv(e3dVec3ListIndexSearch(points, index));
+
+					nodeListOfIntLists = e3dIntListOfListsIndexSearch(indices, i + 1);
+					nodeIntList = e3dIntListIndexSearch(nodeListOfIntLists, 0);
+					index = nodeIntList->data;
+					glVertex3fv(e3dVec3ListIndexSearch(points, index));
+				}
+
+			}
+			glDisable(GL_CULL_FACE);
+			glEnd();
 		}
-		glEnd();
-	}
+	glEndList();
 }

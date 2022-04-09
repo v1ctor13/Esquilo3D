@@ -1,6 +1,6 @@
 #include "util.h"
 
-// ---- E3D_INT_LIST 
+// ---- E3D_INT_LIST
 
 E3D_INT_LIST e3dCreateIntList(){
     E3D_INT_LIST list = (E3D_INT_LIST)malloc(sizeof(E3D_INT_LIST));
@@ -26,7 +26,6 @@ void e3dDestroyIntList(E3D_INT_LIST list){
 
 int e3dSizeofIntList(E3D_INT_LIST list){
     if(list == NULL) return 0;
-
     int c = 0;
     E3D_NODE_INT_LIST* node = *list;
     while(node != NULL){

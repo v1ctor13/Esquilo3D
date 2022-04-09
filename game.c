@@ -1,12 +1,10 @@
 #include "Esquilo3D.h"
 
 void loop(GLFWwindow* window){
+	e3dSetFps(60);
+
 	do{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		e3dRedimensionate(window);
-		e3dDraw();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		e3dGameLoop(window);
 	}while(!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE));
 }
 

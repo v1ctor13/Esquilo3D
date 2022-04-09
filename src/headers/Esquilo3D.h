@@ -21,10 +21,13 @@
 
 /*@brief Inicializa a janela em contexto OpenGL recebendo a Altura e a Largura em pixels*/
 GLFWwindow* e3dInitializeWindow(unsigned int width, unsigned int height);
-
+void e3dGameLoop(GLFWwindow* window);
+static void e3dLoopTimer();
+void e3dSetFps(int value);
 void e3dGpuInfo();
 void e3dRedimensionate(GLFWwindow* window);
-void e3dDraw();
+void e3dDrawInit();
+void e3dDraw(float delta);
 void e3dCheckGLError();
 
 #endif

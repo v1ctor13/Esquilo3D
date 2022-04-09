@@ -4,6 +4,7 @@
         "math.h": "c",
         "glfw3.h": "c",
         "glew.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "esquilo3d.h": "c"
     }
 }

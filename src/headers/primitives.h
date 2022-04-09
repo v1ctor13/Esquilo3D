@@ -12,6 +12,6 @@ typedef struct E3D_POINT3D{
 
 //--------------- PROTÓTIPOS ----------------
 void e3dDrawCube(float s);
-void e3dDrawSphere(float radius, unsigned int nStacks, unsigned int nSectors);
+void e3dDrawSphere(unsigned int id, float radius, E3D_COLOR color, unsigned int nStacks, unsigned int nSectors);
 
 #endif
