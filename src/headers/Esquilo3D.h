@@ -17,8 +17,9 @@
 
 //-----------------   TIPOS    -----------------/
 
-typedef struct E3D_3D_OBJECT_STRUCT E3D_3D_OBJECT;
-typedef struct E3D_NODE_3D_OBJECT_LIST** E3D_3D_OBJECT_LIST;
+typedef struct E3D_3D_OBJECT_STRUCT* E3D_3D_OBJECT;
+typedef struct E3D_NODE_3D_OBJECT_LIST_STRUCT E3D_NODE_3D_OBJECT_LIST;
+typedef E3D_NODE_3D_OBJECT_LIST** E3D_3D_OBJECT_LIST;
 
 //----------------- PROTÓTIPOS -----------------/
 
@@ -31,6 +32,8 @@ void e3dRedimensionate(GLFWwindow* window);
 void e3dDrawInit();
 void e3dDraw(float delta);
 void e3dCheckGLError();
+
+E3D_3D_OBJECT e3dCreate3dObject();
 
 E3D_3D_OBJECT_LIST e3dCreate3dObjectList();
 void e3dDestroy3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList);

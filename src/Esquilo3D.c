@@ -9,9 +9,9 @@ struct E3D_3D_OBJECT_STRUCT{
     E3D_VEC3 pos;
 };
 
-struct E3D_NODE_3D_OBJECT_LIST{
+struct E3D_NODE_3D_OBJECT_LIST_STRUCT{
     E3D_3D_OBJECT obj;
-    struct E3D_NODE_3D_OBJECT_LIST* next;
+    struct E3D_NODE_3D_OBJECT_LIST_STRUCT* next;
 };
 
 // FPS
@@ -146,4 +146,70 @@ void e3dRedimensionate(GLFWwindow* window){
     gluPerspective(45.0f, aspect, 0.1f, 500.0f);
 
 	glMatrixMode(GL_MODELVIEW);
+}
+
+// ---- 3D OBJECT ----
+
+E3D_3D_OBJECT e3dCreate3dObject(){
+    struct E3D_3D_OBJECT_STRUCT* obj;
+    obj->id = 0;
+
+    E3D_VEC3 v = e3dCreateVec3(0.0f, 0.0f, 0.0f);
+    obj->pos = v;
+    return obj;
+}
+
+E3D_3D_OBJECT_LIST e3dCreate3dObjectList(){
+    E3D_3D_OBJECT_LIST e3dObjectList = (E3D_3D_OBJECT_LIST)malloc(sizeof(E3D_3D_OBJECT_LIST));
+    if(e3dObjectList != NULL){
+        *e3dObjectList = NULL;
+    }else{
+        return e3dObjectList;
+    }
+    return e3dObjectList;
+}
+
+void e3dDestroy3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList){
+    if(e3dObjectList != NULL){
+        E3D_NODE_3D_OBJECT_LIST* node;
+        while((*e3dObjectList != NULL)){
+            node = *e3dObjectList;
+            *e3dObjectList = (*e3dObjectList)->next;
+            free(node);
+        }
+        free(e3dObjectList);
+    }
+}
+
+int e3dSizeof3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList){
+    if(e3dObjectList == NULL) return 0;
+    
+    int c = 0;
+    E3D_NODE_3D_OBJECT_LIST* node = *e3dObjectList;
+    while(node != NULL){
+        c++;
+        node = node->next;
+    }
+    return c;
+}
+
+int e3dInsertInto3dObjectList(E3D_3D_OBJECT_LIST e3dObjectList, E3D_3D_OBJECT obj){
+    if(e3dObjectList == NULL) return 0;
+    
+    E3D_NODE_3D_OBJECT_LIST* node = (E3D_NODE_3D_OBJECT_LIST*)malloc(sizeof(E3D_NODE_3D_OBJECT_LIST));
+    if(node == NULL) return -1;
+    
+    node->obj = obj;
+    node->next = NULL;
+
+    if(*e3dObjectList ==  NULL){
+        *e3dObjectList = node;
+    }else{
+        E3D_NODE_3D_OBJECT_LIST* aux = *e3dObjectList;
+        while(aux->next != NULL){
+            aux = aux->next;
+        }
+        aux->next = node;
+    }
+    return 1;
 }
